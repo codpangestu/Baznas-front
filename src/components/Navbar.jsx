@@ -1,20 +1,18 @@
 import React from 'react';
 import { Search, LayoutDashboard, LogOut, User } from 'lucide-react';
 
-export default function Navbar({ 
-  user, 
-  searchQuery, 
-  setSearchQuery, 
-  setShowDashboard, 
-  handleLogout, 
-  setShowAuthModal 
+export default function Navbar({
+  user,
+  searchQuery,
+  setSearchQuery,
+  setShowDashboard,
+  handleLogout,
+  setShowAuthModal
 }) {
   return (
     <header className="flex items-center justify-between px-6 lg:px-8 py-6 shrink-0 z-20 border-b border-slate-100 bg-white/60 backdrop-blur-md">
-      <div className="flex items-center gap-4">
-        <div className="w-10 h-10 rounded-full bg-baznas-green flex items-center justify-center shrink-0">
-          <span className="text-white font-black text-xs">BZN</span>
-        </div>
+      <div className="flex items-center gap-2">
+        <img src="/Baznas.png" alt="BAZNAS Logo" className="h-20 w-auto object-contain shrink-0" />
         <h1 className="text-xl lg:text-2xl font-black tracking-widest uppercase m-0 text-baznas-green">
           BAZNAS PORTAL
         </h1>
@@ -39,8 +37,8 @@ export default function Navbar({
               <span className="text-[9px] uppercase tracking-wider text-baznas-green">{user.role}</span>
             </div>
             {user.role === 'admin' && (
-              <button 
-                onClick={() => setShowDashboard(true)} 
+              <button
+                onClick={() => setShowDashboard(true)}
                 className="px-4 py-2 rounded-full bg-baznas-yellow hover:bg-yellow-400 text-white text-xs font-bold flex items-center gap-1.5 transition"
               >
                 <LayoutDashboard size={14} /> Admin Panel
@@ -51,8 +49,8 @@ export default function Navbar({
             </button>
           </div>
         ) : (
-          <button 
-            onClick={() => setShowAuthModal(true)} 
+          <button
+            onClick={() => setShowAuthModal(true)}
             className="px-5 py-2.5 rounded-full bg-baznas-green hover:bg-baznas-dark text-white text-xs font-bold flex items-center gap-2 transition-all shadow-md"
           >
             <User size={14} /> Console Access
