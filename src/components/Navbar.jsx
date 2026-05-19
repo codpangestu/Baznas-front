@@ -1,34 +1,64 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Search, LayoutDashboard, LogOut, User } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ 
+  user, 
+  searchQuery, 
+  setSearchQuery, 
+  setShowDashboard, 
+  handleLogout, 
+  setShowAuthModal 
+}) {
   return (
-    <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 border-b border-gray-200 shadow-sm transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xl shadow-lg">
-              B
-            </div>
-            <Link to="/" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-              BZN Portal
-            </Link>
-          </div>
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Home</Link>
-            <Link to="/about" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">About</Link>
-            <Link to="/services" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Services</Link>
-            <Link to="/contact" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">Contact</Link>
-          </div>
-          <div className="flex items-center space-x-4">
-            <button className="hidden md:block px-4 py-2 text-indigo-600 font-medium hover:bg-indigo-50 rounded-full transition-colors">
-              Log in
-            </button>
-            <button className="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
-              Sign up
-            </button>
-          </div>
+    <header className="flex items-center justify-between px-6 lg:px-8 py-6 shrink-0 z-20 border-b border-slate-100 bg-white/60 backdrop-blur-md">
+      <div className="flex items-center gap-4">
+        <div className="w-10 h-10 rounded-full bg-baznas-green flex items-center justify-center shrink-0">
+          <span className="text-white font-black text-xs">BZN</span>
         </div>
+        <h1 className="text-xl lg:text-2xl font-black tracking-widest uppercase m-0 text-baznas-green">
+          BAZNAS PORTAL
+        </h1>
       </div>
-    </nav>
+
+      <div className="relative max-w-xs w-full hidden md:block">
+        <input
+          type="text"
+          placeholder="Search Province..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full bg-slate-50 border border-slate-200 rounded-full py-2 px-4 pl-10 text-xs text-baznas-ink placeholder-slate-400 focus:outline-none focus:border-baznas-green focus:ring-1 focus:ring-baznas-green transition-all"
+        />
+        <Search size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+      </div>
+
+      <div className="flex items-center gap-4">
+        {user ? (
+          <div className="flex items-center gap-3">
+            <div className="hidden sm:flex flex-col text-right">
+              <span className="text-xs font-bold text-baznas-ink">{user.name}</span>
+              <span className="text-[9px] uppercase tracking-wider text-baznas-green">{user.role}</span>
+            </div>
+            {user.role === 'admin' && (
+              <button 
+                onClick={() => setShowDashboard(true)} 
+                className="px-4 py-2 rounded-full bg-baznas-yellow hover:bg-yellow-400 text-white text-xs font-bold flex items-center gap-1.5 transition"
+              >
+                <LayoutDashboard size={14} /> Admin Panel
+              </button>
+            )}
+            <button onClick={handleLogout} className="p-2 rounded-full bg-slate-50 border border-slate-200 hover:bg-red-50 text-slate-400 hover:text-red-500 transition-all">
+              <LogOut size={16} />
+            </button>
+          </div>
+        ) : (
+          <button 
+            onClick={() => setShowAuthModal(true)} 
+            className="px-5 py-2.5 rounded-full bg-baznas-green hover:bg-baznas-dark text-white text-xs font-bold flex items-center gap-2 transition-all shadow-md"
+          >
+            <User size={14} /> Console Access
+          </button>
+        )}
+      </div>
+    </header>
   );
 }
