@@ -26,11 +26,11 @@ export default function ProvinceCard({ province, id, activeCard, onClick }) {
         <h4 className="mt-1 text-2xl font-black uppercase leading-tight tracking-wide">{province.name}</h4>
         <div className="mt-3 flex items-center gap-1.5">
           <span className="px-2 py-0.5 rounded bg-white/20 backdrop-blur-sm text-[9px] font-bold uppercase">
-            {province.organizations_count || 0} Organizations
+            {province.organizations_count || 0} Organisasi
           </span>
         </div>
         <button className="mt-4 flex items-center gap-2 text-xs text-white/70 group-hover:text-baznas-yellow transition uppercase tracking-widest font-bold">
-          Explore Region <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          Jelajahi Wilayah <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>
