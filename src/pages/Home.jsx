@@ -213,12 +213,13 @@ export default function Home() {
                         className="flex gap-4 overflow-x-auto pb-4 snap-x scrollbar-hide scroll-smooth"
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                       >
-                        {filteredProvinces.map((prov) => (
+                        {filteredProvinces.map((prov, index) => (
                           <div key={prov.id} className="snap-start shrink-0">
                             <ProvinceCard 
                               province={prov} 
-                              onViewDetails={handleViewProvinceDetails} 
-                              isLoadingDetail={isLoadingDetail} 
+                              id={index + 1}
+                              activeCard={activeCard}
+                              onClick={() => handleViewProvinceDetails(prov.slug)}
                             />
                           </div>
                         ))}

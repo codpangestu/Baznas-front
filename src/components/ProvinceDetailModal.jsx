@@ -1,9 +1,21 @@
-import React from 'react';
-import { X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, ArrowRight } from 'lucide-react';
 import DaerahCard from './DaerahCard';
 
 export default function ProvinceDetailModal({ selectedProvince, onClose }) {
+  const [showAllDaerah, setShowAllDaerah] = useState(false);
+
+  useEffect(() => {
+    if (selectedProvince) {
+      setShowAllDaerah(false);
+    }
+  }, [selectedProvince]);
+
   if (!selectedProvince) return null;
+
+  const daerahs = selectedProvince.daerahs || [];
+  const displayDaerahs = showAllDaerah ? daerahs : daerahs.slice(0, 4);
+  const hasMoreDaerah = daerahs.length > 4;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-all duration-300">
@@ -39,17 +51,42 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
           <div>
             <h4 className="text-xs uppercase tracking-[0.2em] text-baznas-green font-black mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-baznas-green rounded-full animate-ping" />
-              Daerah Administratif ({selectedProvince.daerahs?.length || 0} Daerah)
+              Daerah Administratif ({daerahs.length} Daerah)
             </h4>
-            {(!selectedProvince.daerahs || selectedProvince.daerahs.length === 0) ? (
+            {daerahs.length === 0 ? (
               <div className="text-center py-6 text-slate-400 border border-dashed border-slate-300 rounded-xl text-xs bg-white">
                 Belum ada daerah yang terdaftar di provinsi ini.
               </div>
             ) : (
-              <div className="grid sm:grid-cols-2 gap-4">
-                {selectedProvince.daerahs.map((daerah) => (
-                  <DaerahCard key={daerah.id} daerah={daerah} />
-                ))}
+              <div className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {displayDaerahs.map((daerah) => (
+                    <DaerahCard key={daerah.id} daerah={daerah} />
+                  ))}
+                </div>
+                
+                {hasMoreDaerah && !showAllDaerah && (
+                  <div className="flex justify-center pt-2">
+                    <button 
+                      onClick={() => setShowAllDaerah(true)}
+                      className="px-6 py-2.5 rounded-full bg-white border border-baznas-green text-baznas-green hover:bg-baznas-green hover:text-white text-xs font-bold transition-all flex items-center gap-2 group shadow-sm uppercase tracking-wider"
+                    >
+                      Lihat Semua Daerah
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                )}
+                
+                {hasMoreDaerah && showAllDaerah && (
+                  <div className="flex justify-center pt-2">
+                    <button 
+                      onClick={() => setShowAllDaerah(false)}
+                      className="px-6 py-2.5 rounded-full bg-white border border-slate-300 text-slate-500 hover:bg-slate-100 text-xs font-bold transition-all flex items-center gap-2 group shadow-sm uppercase tracking-wider"
+                    >
+                      Sembunyikan
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </div>
