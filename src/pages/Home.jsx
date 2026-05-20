@@ -1,10 +1,12 @@
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
 import Navbar from '../components/Navbar';
 import ProvinceCard from '../components/ProvinceCard';
 import AuthModal from '../components/AuthModal';
 import ProvinceDetailModal from '../components/ProvinceDetailModal';
 import api from '../services/api';
+import InteractiveMap from '../components/InteractiveMap';
 
 export default function Home() {
   const scrollRef = useRef(null);
@@ -109,22 +111,15 @@ export default function Home() {
     <main className="min-h-screen bg-baznas-gray relative overflow-hidden text-baznas-ink font-sans">
       
       {/* MAP BACKGROUND (INTERACTIVE) */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none transition-all duration-700">
-        <img
-          src="/id-map.svg"
-          alt="Indonesia Map"
-          className="w-full max-w-[1200px] h-auto object-contain blur-[1px]"
-        />
-        {provinces.map((p, idx) => (
-           <div 
-             key={p.id}
-             className={`absolute w-3 h-3 rounded-full transition-all duration-300 ${activeCard === (idx + 1) ? 'bg-baznas-green scale-[3] shadow-[0_0_20px_rgba(0,166,81,0.8)] z-10' : 'bg-baznas-green/30'}`}
-             style={{
-               top: `${40 + (idx * 7) % 20}%`,
-               left: `${30 + (idx * 11) % 40}%`
-             }}
-           />
-        ))}
+      <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-auto transition-all duration-700 p-6">
+        <div className="w-full h-full max-w-[1200px] max-h-full flex items-center justify-center">
+          <InteractiveMap
+            activeSlug={filteredProvinces[activeCard - 1]?.slug}
+            provinces={provinces}
+            isInteractive={true}
+            onSelectProvince={handleViewProvinceDetails}
+          />
+        </div>
       </div>
 
       <div className="relative min-h-screen p-3 lg:p-5">
@@ -159,10 +154,10 @@ export default function Home() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  <button className="px-6 py-3.5 rounded-full bg-baznas-green hover:bg-baznas-dark text-white text-xs font-bold transition-all flex items-center gap-2 group shadow-xl shadow-baznas-green/20 uppercase tracking-wider">
+                  <Link to="/explore" className="px-6 py-3.5 rounded-full bg-baznas-green hover:bg-baznas-dark text-white text-xs font-bold transition-all flex items-center gap-2 group shadow-xl shadow-baznas-green/20 uppercase tracking-wider">
                     Eksplorasi Nasional
                     <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                  </button>
+                  </Link>
                   <div className="flex flex-col">
                     <span className="text-xl font-black text-baznas-ink">{provinces.length}</span>
                     <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Data Aktif</span>

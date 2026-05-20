@@ -87,3 +87,21 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Interactive Vector Map */
+.indonesia-map svg path {
+  transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1), stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1), filter 0.3s ease;
+}
+
+.indonesia-map svg path:hover {
+  fill: color-mix(in srgb, var(--color-baznas-green) 85%, white) !important;
+  stroke: var(--color-baznas-green) !important;
+  filter: drop-shadow(0 0 6px rgba(0, 166, 81, 0.4));
+}
+
+.indonesia-map svg path.active-province {
+  fill: var(--color-baznas-green) !important;
+  stroke: #ffffff !important;
+  stroke-width: 1px !important;
+  filter: drop-shadow(0 0 12px rgba(0, 166, 81, 0.7));
+}
