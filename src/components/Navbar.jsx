@@ -1,11 +1,11 @@
 import React from 'react';
 import { Search, LayoutDashboard, LogOut, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({
   user,
   searchQuery,
   setSearchQuery,
-  setShowDashboard,
   handleLogout,
   setShowAuthModal
 }) {
@@ -37,12 +37,12 @@ export default function Navbar({
               <span className="text-[9px] uppercase tracking-wider text-baznas-green">{user.role}</span>
             </div>
             {user.role === 'admin' && (
-              <button 
-                onClick={() => setShowDashboard(true)}
+              <Link 
+                to="/dashboard"
                 className="px-4 py-2 rounded-full bg-baznas-yellow hover:bg-yellow-400 text-white text-xs font-bold flex items-center gap-1.5 transition"
               >
                 <LayoutDashboard size={14} /> Panel Admin
-              </button>
+              </Link>
             )}
             <button onClick={handleLogout} className="p-2 rounded-full bg-slate-50 border border-slate-200 hover:bg-red-50 text-slate-400 hover:text-red-500 transition-all">
               <LogOut size={16} />

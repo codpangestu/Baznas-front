@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Dashboard from './pages/Dashboard';
 import './App.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     <div className="min-h-screen bg-[#06101D] text-white font-sans">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
