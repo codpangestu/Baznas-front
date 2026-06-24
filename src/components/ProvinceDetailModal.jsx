@@ -18,8 +18,8 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
   const hasMoreDaerah = daerahs.length > 4;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-all duration-300">
-      <div className="relative w-full max-w-4xl max-h-[85vh] rounded-[24px] border border-slate-200 bg-white shadow-2xl flex flex-col overflow-hidden animate-zoomIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/45 backdrop-blur-md transition-all duration-300">
+      <div className="relative w-full max-w-4xl max-h-[85vh] rounded-[28px] border border-slate-200/60 bg-white/95 backdrop-blur-xl shadow-premium-lg flex flex-col overflow-hidden animate-zoomIn">
 
         {/* Header Banner */}
         <div className="relative h-44 shrink-0 bg-baznas-green overflow-hidden flex items-end p-6">
@@ -27,38 +27,38 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
             <img
               src={selectedProvince.image}
               alt={selectedProvince.name}
-              className="absolute inset-0 w-full h-full object-cover opacity-35"
+              className="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-[2000ms] hover:scale-105"
             />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent" />
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-black/20 hover:bg-black/40 text-white transition z-10"
+            className="absolute top-4 right-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 z-10 hover:rotate-90 active:scale-95 border border-white/10 backdrop-blur-sm cursor-pointer"
           >
-            <X size={20} />
+            <X size={18} />
           </button>
 
           <div className="relative z-10">
-            <span className="text-[10px] font-black uppercase tracking-widest text-baznas-yellow">WILAYAH PROVINSI</span>
-            <h3 className="text-3xl font-black uppercase text-white mt-1 m-0">{selectedProvince.name}</h3>
+            <span className="text-[9px] font-black uppercase tracking-[0.25em] text-baznas-yellow">WILAYAH PROVINSI</span>
+            <h3 className="text-3xl font-black uppercase text-white mt-1 m-0 leading-tight">{selectedProvince.name}</h3>
           </div>
         </div>
 
         {/* Modal Body */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-8 bg-slate-50">
+        <div className="flex-1 overflow-y-auto p-6 space-y-8 bg-slate-50/50">
 
           {/* Daerahs (Districts) Section */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-baznas-green font-black mb-4 flex items-center gap-2">
+            <h4 className="text-xs uppercase tracking-[0.25em] text-baznas-green font-black mb-4 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-baznas-green rounded-full animate-ping" />
               Daerah Administratif ({daerahs.length} Daerah)
             </h4>
             {daerahs.length === 0 ? (
-              <div className="text-center py-6 text-slate-400 border border-dashed border-slate-300 rounded-xl text-xs bg-white">
+              <div className="text-center py-8 text-slate-400 border border-dashed border-slate-200 rounded-2xl text-xs bg-white font-bold uppercase tracking-wider">
                 Belum ada daerah yang terdaftar di provinsi ini.
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-4">
                   {displayDaerahs.map((daerah) => (
                     <DaerahCard key={daerah.id} daerah={daerah} />
@@ -69,10 +69,10 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
                   <div className="flex justify-center pt-2">
                     <button 
                       onClick={() => setShowAllDaerah(true)}
-                      className="px-6 py-2.5 rounded-full bg-white border border-baznas-green text-baznas-green hover:bg-baznas-green hover:text-white text-xs font-bold transition-all flex items-center gap-2 group shadow-sm uppercase tracking-wider"
+                      className="px-6 py-2.5 rounded-full bg-white border border-baznas-green text-baznas-green hover:bg-baznas-green hover:text-white text-[10px] font-extrabold transition-all duration-300 flex items-center gap-2 group shadow-sm hover:shadow-lg hover:shadow-baznas-green/15 uppercase tracking-widest cursor-pointer"
                     >
                       Lihat Semua Daerah
-                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
                   </div>
                 )}
@@ -81,7 +81,7 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
                   <div className="flex justify-center pt-2">
                     <button 
                       onClick={() => setShowAllDaerah(false)}
-                      className="px-6 py-2.5 rounded-full bg-white border border-slate-300 text-slate-500 hover:bg-slate-100 text-xs font-bold transition-all flex items-center gap-2 group shadow-sm uppercase tracking-wider"
+                      className="px-6 py-2.5 rounded-full bg-white border border-slate-300 text-slate-500 hover:bg-slate-100 text-[10px] font-extrabold transition-all duration-300 flex items-center gap-2 group shadow-sm uppercase tracking-widest cursor-pointer"
                     >
                       Sembunyikan
                     </button>
@@ -93,22 +93,26 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
 
           {/* Organizations Section */}
           <div>
-            <h4 className="text-xs uppercase tracking-[0.2em] text-baznas-green font-black mb-4">
+            <h4 className="text-xs uppercase tracking-[0.25em] text-baznas-green font-black mb-4">
               Organisasi Aktif ({selectedProvince.organizations?.length || 0})
             </h4>
             {(!selectedProvince.organizations || selectedProvince.organizations.length === 0) ? (
-              <div className="text-center py-6 text-slate-400 border border-dashed border-slate-300 rounded-xl text-xs bg-white">
+              <div className="text-center py-8 text-slate-400 border border-dashed border-slate-200 rounded-2xl text-xs bg-white font-bold uppercase tracking-wider">
                 Belum ada organisasi aktif di provinsi ini.
               </div>
             ) : (
               <div className="grid sm:grid-cols-2 gap-4">
                 {selectedProvince.organizations.map((org) => (
-                  <div key={org.id} className="p-4 rounded-xl border border-slate-200 bg-white shadow-sm flex items-center justify-between">
+                  <div key={org.id} className="p-4 rounded-xl border border-slate-200 bg-white hover:border-baznas-green/30 hover:shadow-premium transition-all duration-300 flex items-center justify-between shadow-sm">
                     <div>
-                      <h5 className="text-sm font-bold text-baznas-ink">{org.name}</h5>
-                      <span className="text-[9px] uppercase tracking-wider text-slate-500">{org.region}</span>
+                      <h5 className="text-xs font-black text-baznas-ink uppercase tracking-wide">{org.name}</h5>
+                      <span className="text-[9px] uppercase tracking-wider text-slate-400 font-mono mt-0.5 block">{org.region}</span>
                     </div>
-                    <span className={`px-2 py-0.5 rounded text-[8px] font-bold tracking-wider uppercase ${org.status === 'active' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                    <span className={`px-2 py-0.5 rounded-full text-[8px] font-black tracking-wider uppercase ${
+                      org.status === 'active' 
+                        ? 'bg-green-50 text-green-700 border border-green-200' 
+                        : 'bg-red-50 text-red-700 border border-red-200'
+                    }`}>
                       {org.status}
                     </span>
                   </div>

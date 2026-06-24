@@ -64,16 +64,16 @@ export default function MapPage() {
     <main className="min-h-screen bg-baznas-gray relative overflow-hidden text-baznas-ink font-sans flex flex-col lg:flex-row">
 
       {/* LEFT: INTERACTIVE MAP */}
-      <section className="relative w-full lg:w-3/5 h-[50vh] lg:h-screen flex flex-col bg-white border-r border-gray-200">
-        <div className="absolute top-6 left-6 z-20 flex gap-4 items-center">
-          <button 
+      <section className="relative w-full lg:w-3/5 h-[50vh] lg:h-screen flex flex-col bg-slate-50 border-r border-slate-200/60">
+        <div className="absolute top-6 left-6 z-20 flex gap-4 items-center p-3 sm:p-3.5 pr-5 sm:pr-6 rounded-2xl bg-white/70 backdrop-blur-xl border border-slate-200/60 shadow-premium">
+          <button
             onClick={() => navigate('/')}
-            className="w-10 h-10 rounded-full bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 flex items-center justify-center transition backdrop-blur-md border border-slate-900/10 shadow-lg">
-              <ChevronLeft size={20} />
+            className="w-9 h-9 rounded-full bg-white hover:bg-slate-50 text-slate-700 flex items-center justify-center transition-all duration-300 border border-slate-200/60 shadow-sm active:scale-95 cursor-pointer">
+            <ChevronLeft size={16} />
           </button>
           <div className="text-baznas-ink">
-            <h2 className="text-xl font-black uppercase tracking-wider m-0">Peta Nasional</h2>
-            <p className="text-[10px] tracking-[0.2em] text-baznas-green uppercase opacity-80">Eksplorasi Wilayah BAZNAS</p>
+            <h2 className="text-sm font-black uppercase tracking-wider m-0 leading-tight">Peta Nasional</h2>
+            <p className="text-[8px] tracking-[0.2em] text-baznas-green uppercase font-black opacity-90 mt-0.5">Eksplorasi Wilayah BAZNAS</p>
           </div>
         </div>
 
@@ -90,44 +90,44 @@ export default function MapPage() {
       </section>
 
       {/* RIGHT: PROVINCES LIST */}
-      <section className="relative w-full lg:w-2/5 h-[50vh] lg:h-screen bg-slate-50 flex flex-col border-t lg:border-t-0 border-slate-200">
+      <section className="relative w-full lg:w-2/5 h-[50vh] lg:h-screen bg-slate-50/50 flex flex-col border-t lg:border-t-0 border-slate-200/60">
 
         {/* Search Header */}
-        <div className="p-6 lg:p-8 bg-white border-b border-slate-200 shrink-0 z-10 shadow-sm">
-          <h3 className="text-2xl font-black text-baznas-ink uppercase mb-4">Daftar Provinsi</h3>
+        <div className="p-6 lg:p-8 bg-white border-b border-slate-200/60 shrink-0 z-10 shadow-sm">
+          <h3 className="text-lg font-black text-baznas-ink uppercase tracking-wider mb-4">Daftar Provinsi</h3>
           <div className="relative w-full">
             <input
               type="text"
               placeholder="Cari provinsi..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-4 pl-12 text-sm text-baznas-ink placeholder-slate-400 focus:outline-none focus:border-baznas-green focus:ring-1 focus:ring-baznas-green transition-all"
+              className="w-full bg-slate-50/60 hover:bg-slate-50 border border-slate-200/80 rounded-2xl py-3 px-4 pl-12 text-xs text-baznas-ink placeholder-slate-400 focus:outline-none focus:border-baznas-green focus:ring-4 focus:ring-baznas-green/10 transition-all duration-300 shadow-sm focus:shadow-md"
             />
-            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search size={16} className="absolute left-4.5 top-1/2 -translate-y-1/2 text-slate-400" />
           </div>
         </div>
 
         {/* Scrollable List */}
-        <div className="flex-1 overflow-y-auto p-6 lg:p-8">
+        <div className="flex-1 overflow-y-auto p-6 lg:p-8 scrollbar-hide">
           {isLoading ? (
             <div className="h-full w-full flex flex-col items-center justify-center gap-3 text-slate-400">
-              <RefreshCw size={24} className="animate-spin text-baznas-green" />
-              <span className="text-xs uppercase font-bold tracking-widest">Memuat Data...</span>
+              <RefreshCw size={20} className="animate-spin text-baznas-green" />
+              <span className="text-[9px] uppercase font-black tracking-widest">Memuat Data...</span>
             </div>
           ) : filteredProvinces.length === 0 ? (
-            <div className="h-full flex items-center justify-center text-slate-400 text-sm italic">
+            <div className="h-full flex items-center justify-center text-slate-400 text-xs italic">
               Tidak ada Provinsi yang cocok dengan pencarian Anda.
             </div>
           ) : (
             <div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-5"
               onMouseLeave={() => handleHoverLeave()}
             >
               {filteredProvinces.map((prov, index) => (
                 <div
                   key={prov.id}
                   onMouseEnter={() => handleHoverEnter(prov.id)}
-                  className="w-full transform transition-all duration-300 hover:-translate-y-1"
+                  className="w-full transform transition-all duration-300"
                 >
                   <ProvinceCard
                     province={prov}
