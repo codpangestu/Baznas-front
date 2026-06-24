@@ -22,33 +22,33 @@ const Instagram = (props) => (
 
 export default function DaerahCard({ daerah }) {
   return (
-    <div className="p-4 rounded-xl border border-slate-200 bg-white flex flex-col justify-between gap-4 hover:border-baznas-green/30 transition-all shadow-sm">
+    <div className="p-5 rounded-2xl border border-slate-200/80 bg-white flex flex-col justify-between gap-4 hover:border-baznas-green/40 hover:shadow-premium hover:-translate-y-0.5 transition-all duration-300">
       <div>
-        <h5 className="text-sm font-bold text-baznas-ink uppercase">{daerah.name}</h5>
-        <p className="text-[10px] text-slate-500 font-mono mt-0.5">{daerah.slug}</p>
+        <h5 className="text-sm font-black text-baznas-ink uppercase tracking-wide">{daerah.name}</h5>
+        <p className="text-[9px] text-slate-400 font-mono mt-1 uppercase tracking-wider">{daerah.slug}</p>
       </div>
       {/* Embed Social links */}
-      <div className="flex items-center gap-3 pt-2 border-t border-slate-100">
+      <div className="flex items-center gap-3.5 pt-3 border-t border-slate-100">
         {daerah.website ? (
-          <a href={daerah.website} target="_blank" rel="noreferrer" title="Website" className="p-1.5 rounded-full bg-blue-50 hover:bg-blue-100 text-blue-600 transition">
-            <Globe size={14} />
+          <a href={daerah.website} target="_blank" rel="noreferrer" title="Website" className="p-2 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-600 hover:text-blue-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">
+            <Globe size={13} />
           </a>
         ) : (
-          <span className="p-1.5 rounded-full bg-slate-50 text-slate-300" title="No Website"><Globe size={14} /></span>
+          <span className="p-2 rounded-full bg-slate-50/50 text-slate-300" title="No Website"><Globe size={13} /></span>
         )}
         {daerah.instagram ? (
-          <a href={`https://instagram.com/${daerah.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" title="Instagram" className="p-1.5 rounded-full bg-pink-50 hover:bg-pink-100 text-pink-600 transition">
-            <Instagram size={14} />
+          <a href={`https://instagram.com/${daerah.instagram.replace('@', '')}`} target="_blank" rel="noreferrer" title="Instagram" className="p-2 rounded-full bg-slate-50 hover:bg-pink-50 text-slate-600 hover:text-pink-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">
+            <Instagram size={13} />
           </a>
         ) : (
-          <span className="p-1.5 rounded-full bg-slate-50 text-slate-300" title="No Instagram"><Instagram size={14} /></span>
+          <span className="p-2 rounded-full bg-slate-50/50 text-slate-300" title="No Instagram"><Instagram size={13} /></span>
         )}
         {daerah.email ? (
-          <a href={`mailto:${daerah.email}`} title="Email" className="p-1.5 rounded-full bg-green-50 hover:bg-green-100 text-green-600 transition">
-            <Mail size={14} />
+          <a href={`mailto:${daerah.email}`} title="Email" className="p-2 rounded-full bg-slate-50 hover:bg-green-50 text-slate-600 hover:text-green-600 hover:scale-105 active:scale-95 transition-all duration-300 shadow-sm">
+            <Mail size={13} />
           </a>
         ) : (
-          <span className="p-1.5 rounded-full bg-slate-50 text-slate-300" title="No Email"><Mail size={14} /></span>
+          <span className="p-2 rounded-full bg-slate-50/50 text-slate-300" title="No Email"><Mail size={13} /></span>
         )}
       </div>
     </div>
