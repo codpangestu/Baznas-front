@@ -3,15 +3,15 @@ import { Globe, Mail } from 'lucide-react';
 
 // Standard Inline Instagram SVG component (Lucide design compatible)
 const Instagram = (props) => (
-  <svg 
-    viewBox="0 0 24 24" 
-    width={props.size || 24} 
-    height={props.size || 24} 
-    stroke="currentColor" 
-    strokeWidth="2" 
-    fill="none" 
-    strokeLinecap="round" 
-    strokeLinejoin="round" 
+  <svg
+    viewBox="0 0 24 24"
+    width={props.size || 24}
+    height={props.size || 24}
+    stroke="currentColor"
+    strokeWidth="2"
+    fill="none"
+    strokeLinecap="round"
+    strokeLinejoin="round"
     className={props.className}
   >
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>

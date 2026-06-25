@@ -8,7 +8,7 @@ import DaerahCard from '../components/DaerahCard';
 export default function ProvinceDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  
+
   const [province, setProvince] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -69,16 +69,16 @@ export default function ProvinceDetail() {
 
   return (
     <main className="min-h-screen bg-baznas-gray relative overflow-hidden text-baznas-ink font-sans">
-      
+
       {/* Ambient decorative glowing spots */}
       <div className="absolute -bottom-48 -right-48 w-[400px] h-[400px] rounded-full bg-baznas-green/5 blur-[120px] pointer-events-none" />
       <div className="absolute -top-48 -left-48 w-[400px] h-[400px] rounded-full bg-baznas-yellow/5 blur-[120px] pointer-events-none" />
 
       <div className="relative p-3 lg:p-5">
-        
+
         {/* Main Glassmorphic Wrapper */}
         <div className="relative min-h-[calc(100vh-24px)] lg:min-h-[calc(100vh-40px)] rounded-[32px] border border-slate-200/80 bg-white/90 backdrop-blur-2xl overflow-hidden shadow-premium flex flex-col p-6 lg:p-8 space-y-8 animate-fadeIn">
-          
+
           {/* Header Action Bar */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
             <div className="flex items-center gap-4">
@@ -132,7 +132,7 @@ export default function ProvinceDetail() {
 
           {/* Grid Content */}
           <div className="grid lg:grid-cols-3 gap-8">
-            
+
             {/* Left: Daerahs Grid (2 Cols span) */}
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center gap-2">
@@ -177,11 +177,10 @@ export default function ProvinceDetail() {
                         <h5 className="text-xs font-black text-baznas-ink uppercase tracking-wide">{org.name}</h5>
                         <p className="text-[9px] text-slate-400 mt-1 font-mono uppercase tracking-wider">{org.region || "Wilayah"}</p>
                       </div>
-                      <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${
-                        org.status === 'active' 
-                          ? 'bg-green-50 text-green-700 border border-green-200' 
+                      <span className={`px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider ${org.status === 'active'
+                          ? 'bg-green-50 text-green-700 border border-green-200'
                           : 'bg-amber-50 text-amber-700 border border-amber-200'
-                      }`}>
+                        }`}>
                         {org.status}
                       </span>
                     </div>
