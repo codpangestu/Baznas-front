@@ -14,7 +14,7 @@ export default function AuthModal({ onClose, onSuccess }) {
     setAuthError("");
     try {
       const res = await api.post('/login', { email: authEmail, password: authPassword });
-      
+
       if (res.data && res.data.success) {
         const loggedUser = res.data.data.user;
         const loggedToken = res.data.data.token;

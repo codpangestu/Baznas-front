@@ -12,14 +12,14 @@ export default function Home() {
   const scrollRef = useRef(null);
   const [activeCard, setActiveCard] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   // Data State
   const [provinces, setProvinces] = useState([]);
   const [isLoadingProvinces, setIsLoadingProvinces] = useState(true);
-  
+
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [isLoadingDetail, setIsLoadingDetail] = useState(false);
-  
+
   // Auth State
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('user');
@@ -103,13 +103,13 @@ export default function Home() {
     setShowAuthModal(false);
   };
 
-  const filteredProvinces = provinces.filter(p => 
+  const filteredProvinces = provinces.filter(p =>
     p.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
     <main className="min-h-screen bg-baznas-gray relative overflow-hidden text-baznas-ink font-sans">
-      
+
       {/* Decorative ambient glowing backdrops */}
       <div className="absolute -bottom-48 -right-48 w-[400px] h-[400px] rounded-full bg-baznas-green/5 blur-[120px] pointer-events-none" />
       <div className="absolute -top-48 -left-48 w-[400px] h-[400px] rounded-full bg-baznas-yellow/5 blur-[120px] pointer-events-none" />
@@ -129,9 +129,9 @@ export default function Home() {
       <div className="relative min-h-screen p-3 lg:p-5">
         {/* CONTAINER */}
         <div className="relative min-h-[calc(100vh-24px)] lg:min-h-[calc(100vh-40px)] rounded-[32px] border border-slate-200/80 bg-white/85 backdrop-blur-2xl overflow-hidden shadow-premium flex flex-col">
-          
+
           {/* HEADER */}
-          <Navbar 
+          <Navbar
             user={user}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
@@ -142,7 +142,7 @@ export default function Home() {
           {/* HERO & CONTENT */}
           <section className="relative z-10 px-6 lg:px-10 xl:px-14 pt-8 lg:pt-12 pb-10 flex-1 flex items-center">
             <div className="grid lg:grid-cols-[1fr_1.1fr] gap-12 xl:gap-20 items-center w-full">
-              
+
               {/* LEFT */}
               <div className="max-w-[580px] animate-fadeIn">
                 <div className="flex items-center gap-2 mb-4 sm:mb-5">
@@ -171,21 +171,21 @@ export default function Home() {
 
               {/* RIGHT: PROVINCES SLIDER */}
               <div className="relative w-full min-w-0 flex flex-col justify-center h-full animate-fadeIn">
-                
+
                 <div className="flex items-end justify-between gap-4 mb-5 sm:mb-6 flex-wrap">
                   <div>
                     <p className="text-[9px] tracking-[0.25em] uppercase text-baznas-green font-black">Eksplorasi Nasional</p>
                     <h3 className="text-lg lg:text-xl font-black text-baznas-ink uppercase tracking-wide mt-1">Provinsi di Indonesia</h3>
                   </div>
-                  
+
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       onClick={scrollLeft}
                       className="w-10 h-10 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 flex items-center justify-center transition-all duration-300 shadow-sm hover:shadow active:scale-95 cursor-pointer"
                     >
                       <ChevronLeft size={16} />
                     </button>
-                    <button 
+                    <button
                       onClick={scrollRight}
                       className="w-10 h-10 rounded-full bg-gradient-to-tr from-baznas-green to-baznas-dark text-white flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-lg hover:shadow-baznas-green/20 active:scale-95 cursor-pointer"
                     >
@@ -206,7 +206,7 @@ export default function Home() {
                         Tidak ada Provinsi yang cocok dengan pencarian Anda.
                       </div>
                     ) : (
-                      <div 
+                      <div
                         ref={scrollRef}
                         onScroll={handleScroll}
                         className="flex gap-4 overflow-x-auto pb-4 snap-x scrollbar-hide scroll-smooth"
@@ -214,8 +214,8 @@ export default function Home() {
                       >
                         {filteredProvinces.map((prov, index) => (
                           <div key={prov.id} className="snap-start shrink-0">
-                            <ProvinceCard 
-                              province={prov} 
+                            <ProvinceCard
+                              province={prov}
                               id={index + 1}
                               activeCard={activeCard}
                               onClick={() => handleViewProvinceDetails(prov.slug)}
@@ -224,7 +224,7 @@ export default function Home() {
                         ))}
                       </div>
                     )}
-                    
+
                     {/* Minimalist Progress Indicator */}
                     <div className="mt-6 flex items-center gap-4">
                       <span className="text-[10px] font-black text-baznas-ink font-mono tracking-wider">
@@ -232,7 +232,7 @@ export default function Home() {
                       </span>
                       <div className="w-12 h-[2px] bg-baznas-green/30" />
                       <div className="w-40 h-[3px] bg-slate-100 rounded-full overflow-hidden relative">
-                         <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-baznas-green to-baznas-dark rounded-full transition-all duration-500" style={{ width: `${(activeCard / filteredProvinces.length) * 100}%` }} />
+                        <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-baznas-green to-baznas-dark rounded-full transition-all duration-500" style={{ width: `${(activeCard / filteredProvinces.length) * 100}%` }} />
                       </div>
                       <span className="text-[10px] font-black text-slate-400 font-mono tracking-wider">
                         {String(filteredProvinces.length).padStart(2, '0')}
@@ -247,13 +247,13 @@ export default function Home() {
         </div>
       </div>
 
-      <ProvinceDetailModal 
-        selectedProvince={selectedProvince} 
-        onClose={() => setSelectedProvince(null)} 
+      <ProvinceDetailModal
+        selectedProvince={selectedProvince}
+        onClose={() => setSelectedProvince(null)}
       />
 
       {showAuthModal && (
-        <AuthModal 
+        <AuthModal
           onClose={() => setShowAuthModal(false)}
           onSuccess={handleAuthSuccess}
         />

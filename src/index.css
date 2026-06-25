@@ -104,15 +104,15 @@ body {
 }
 
 .shadow-premium {
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 166, 81, 0.02), 
+  box-shadow:
+    0 4px 6px -1px rgba(0, 166, 81, 0.02),
     0 10px 30px -3px rgba(15, 23, 42, 0.04),
     0 20px 40px -15px rgba(15, 23, 42, 0.06);
 }
 
 .shadow-premium-lg {
-  box-shadow: 
-    0 10px 50px -12px rgba(0, 166, 81, 0.08), 
+  box-shadow:
+    0 10px 50px -12px rgba(0, 166, 81, 0.08),
     0 30px 60px -15px rgba(15, 23, 42, 0.12);
 }
 

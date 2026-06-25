@@ -8,8 +8,8 @@ export default function ProvinceCard({ province, id, activeCard, onClick }) {
       onClick={onClick}
       className={`
         group relative w-[280px] lg:w-[300px] xl:w-[320px] h-[300px] lg:h-[320px] rounded-[24px] overflow-hidden snap-center shrink-0 cursor-pointer transition-all duration-500 border bg-white
-        ${id === activeCard 
-          ? 'border-baznas-green shadow-[0_20px_50px_rgba(0,166,81,0.2)] scale-[1.02]' 
+        ${id === activeCard
+          ? 'border-baznas-green shadow-[0_20px_50px_rgba(0,166,81,0.2)] scale-[1.02]'
           : 'border-slate-200/80 shadow-premium hover:shadow-premium-lg hover:border-baznas-green/40 hover:-translate-y-1'}
       `}
     >
@@ -17,7 +17,7 @@ export default function ProvinceCard({ province, id, activeCard, onClick }) {
         <img src={province.image} alt={province.name} className="absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-105" />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-tr from-slate-100 to-slate-50 flex items-center justify-center">
-           <Globe size={40} className="text-slate-300 transition-transform duration-700 group-hover:rotate-12" />
+          <Globe size={40} className="text-slate-300 transition-transform duration-700 group-hover:rotate-12" />
         </div>
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent transition-opacity duration-500 group-hover:opacity-95" />
