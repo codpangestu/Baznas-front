@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronLeft, ChevronRight, RefreshCw } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from '../components/Navbar';
 import ProvinceCard from '../components/ProvinceCard';
+import ProvinceCardSkeleton from '../components/ProvinceCardSkeleton';
 import AuthModal from '../components/AuthModal';
 import ProvinceDetailModal from '../components/ProvinceDetailModal';
 import api from '../services/api';
@@ -195,9 +196,12 @@ export default function Home() {
                 </div>
 
                 {isLoadingProvinces ? (
-                  <div className="h-[280px] w-full flex flex-col items-center justify-center gap-3 bg-slate-50/40 rounded-3xl border border-dashed border-slate-200 text-slate-400 backdrop-blur-sm">
-                    <RefreshCw size={22} className="animate-spin text-baznas-green" />
-                    <span className="text-[9px] uppercase font-black tracking-widest">Memuat Data...</span>
+                  <div className="flex gap-4 overflow-hidden pb-4">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div key={i} className="shrink-0 first:ml-0" style={{ animationDelay: `${i * 120}ms` }}>
+                        <ProvinceCardSkeleton className="w-[320px]" />
+                      </div>
+                    ))}
                   </div>
                 ) : (
                   <>
@@ -213,7 +217,7 @@ export default function Home() {
                         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                       >
                         {filteredProvinces.map((prov, index) => (
-                          <div key={prov.id} className="snap-start shrink-0">
+                          <div key={prov.id} className="snap-start shrink-0 w-[280px] sm:w-[300px] md:w-[320px]">
                             <ProvinceCard
                               province={prov}
                               id={index + 1}

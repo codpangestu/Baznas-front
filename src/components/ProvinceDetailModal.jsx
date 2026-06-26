@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { X, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import DaerahCard from './DaerahCard';
 
 export default function ProvinceDetailModal({ selectedProvince, onClose }) {
+  const navigate = useNavigate();
   const [showAllDaerah, setShowAllDaerah] = useState(false);
 
   useEffect(() => {
@@ -61,7 +63,11 @@ export default function ProvinceDetailModal({ selectedProvince, onClose }) {
               <div className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-4">
                   {displayDaerahs.map((daerah) => (
-                    <DaerahCard key={daerah.id} daerah={daerah} />
+                    <DaerahCard
+                      key={daerah.id}
+                      daerah={daerah}
+                      onClick={() => navigate(`/daerah/${daerah.slug}`)}
+                    />
                   ))}
                 </div>
 

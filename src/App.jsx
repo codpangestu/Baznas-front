@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import ProvinceDetail from './pages/ProvinceDetail';
+import DaerahDetail from './pages/DaerahDetail';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import MapPage from './pages/MapPage';
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/explore" element={<MapPage />} />
         <Route path="/province/:slug" element={<ProvinceDetail />} />
+        <Route path="/daerah/:slug" element={<DaerahDetail />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>

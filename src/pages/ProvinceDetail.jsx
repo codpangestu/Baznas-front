@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ChevronLeft, RefreshCw, Layers, ShieldCheck, HelpCircle } from 'lucide-react';
+import { ChevronLeft, Layers, ShieldCheck, HelpCircle } from 'lucide-react';
 import api from '../services/api';
 import ProvinceMap from '../components/ProvinceMap';
 import DaerahCard from '../components/DaerahCard';
+import DaerahCardSkeleton from '../components/DaerahCardSkeleton';
 
 export default function ProvinceDetail() {
   const { slug } = useParams();
@@ -39,9 +40,80 @@ export default function ProvinceDetail() {
 
   if (loading) {
     return (
-      <main className="min-h-screen bg-baznas-gray flex flex-col items-center justify-center gap-4 text-baznas-ink">
-        <RefreshCw size={36} className="animate-spin text-baznas-green" />
-        <span className="text-sm font-black uppercase tracking-widest text-slate-400">Memuat Data Wilayah...</span>
+      <main className="min-h-screen bg-baznas-gray relative overflow-hidden text-baznas-ink font-sans">
+        <div className="relative p-3 lg:p-5">
+          <div className="relative min-h-[calc(100vh-24px)] lg:min-h-[calc(100vh-40px)] rounded-[32px] border border-slate-200/80 bg-white/90 backdrop-blur-2xl overflow-hidden shadow-premium flex flex-col p-6 lg:p-8 space-y-8 animate-fadeIn">
+
+            {/* Header Skeleton */}
+            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+              <div className="flex items-center gap-4">
+                <div className="w-9 h-9 rounded-full bg-slate-100 animate-pulse" />
+                <div className="space-y-2">
+                  <div className="h-2.5 w-32 rounded-full bg-slate-100 animate-pulse" />
+                  <div className="h-4 w-48 rounded-full bg-slate-100 animate-pulse" />
+                </div>
+              </div>
+              <div className="h-6 w-32 rounded-full bg-slate-100 animate-pulse hidden sm:block" />
+            </div>
+
+            {/* Map Skeleton */}
+            <div className="w-full h-[40vh] md:h-[50vh] rounded-3xl bg-slate-100 animate-pulse" />
+
+            {/* Stats Bar Skeleton */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl">
+              <div className="p-5 rounded-2xl border border-slate-200/80 bg-white flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 animate-pulse" />
+                <div className="space-y-2">
+                  <div className="h-5 w-12 rounded bg-slate-100 animate-pulse" />
+                  <div className="h-2.5 w-28 rounded-full bg-slate-100 animate-pulse" />
+                </div>
+              </div>
+              <div className="p-5 rounded-2xl border border-slate-200/80 bg-white flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-slate-100 animate-pulse" />
+                <div className="space-y-2">
+                  <div className="h-5 w-12 rounded bg-slate-100 animate-pulse" />
+                  <div className="h-2.5 w-28 rounded-full bg-slate-100 animate-pulse" />
+                </div>
+              </div>
+            </div>
+
+            {/* Content Grid Skeleton */}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Daerahs */}
+              <div className="lg:col-span-2 space-y-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-slate-100 animate-pulse" />
+                  <div className="h-3 w-36 rounded-full bg-slate-100 animate-pulse" />
+                </div>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[1, 2, 3, 4].map((i) => (
+                    <DaerahCardSkeleton key={i} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Organizations */}
+              <div className="space-y-6">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-slate-100 animate-pulse" />
+                  <div className="h-3 w-36 rounded-full bg-slate-100 animate-pulse" />
+                </div>
+                <div className="space-y-3">
+                  {[1, 2].map((i) => (
+                    <div key={i} className="p-4 rounded-xl border border-slate-200 bg-white flex items-center justify-between">
+                      <div className="space-y-2">
+                        <div className="h-3 w-32 rounded bg-slate-100 animate-pulse" />
+                        <div className="h-2.5 w-20 rounded-full bg-slate-100 animate-pulse" />
+                      </div>
+                      <div className="h-5 w-14 rounded-full bg-slate-100 animate-pulse" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </main>
     );
   }
@@ -148,7 +220,10 @@ export default function ProvinceDetail() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   {daerahs.map((daerah) => (
                     <div key={daerah.id} className="transform transition-transform duration-200">
-                      <DaerahCard daerah={daerah} />
+                      <DaerahCard
+                        daerah={daerah}
+                        onClick={() => navigate(`/daerah/${daerah.slug}`)}
+                      />
                     </div>
                   ))}
                 </div>
